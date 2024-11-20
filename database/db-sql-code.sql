@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS public.inventory(
     inv_color character varying NOT NULL,
     classification_id integer NOT NULL,
     CONSTRAINT inventory_pkey PRIMARY KEY (inv_id)
-)
+);
 
 ALTER TABLE IF EXISTS public.inventory
     ADD CONSTRAINT fk_classification FOREIGN KEY (classification_id)

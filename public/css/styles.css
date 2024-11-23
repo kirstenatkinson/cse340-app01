@@ -60,8 +60,16 @@ nav ul {
 
 nav ul li {
   list-style-type: none;
-  color: white;
   padding: 1em;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: white;
+}
+
+nav ul li:hover {
+  background-color: var(--secondary-color);
 }
 
 /* Body */
@@ -152,9 +160,12 @@ nav ul li {
   #wrapper {
     background-color: white;
     margin: 1em 5em;
-    padding: .5em;
     border: .25em solid var(--secondary-color);
     border-radius: 1em;
+  }
+
+  header {
+    padding: .5em;
   }
 
   main {
@@ -174,4 +185,90 @@ nav ul li {
     grid-column: 1 / 2;
     grid-row: 3 / 4;
   }
+
+  main.vehicle-view {
+    grid-template-columns: 3fr 2fr;
+  }
+
+  #vehicle-image {
+    padding: 1em 0 1em 1em;
+  }
+
+}
+
+/* Classification View */
+
+main.classification-view {
+  display: block;
+}
+
+#classification-page-title {
+  text-align: center;
+}
+
+#inv-display {
+  display: flex; /* Use flexbox */
+  flex-wrap: wrap; /* Allow wrapping to new rows */
+  justify-content: center; /* Center the items horizontally */
+  gap: 1rem; /* Add space between cards */
+  padding: 0;
+  margin: 0 auto; /* Center container */
+  list-style-type: none; /* Remove bullets */
+  max-width: 1200px; /* Optional: limit the grid's max width */
+}
+
+#inv-display li {
+  display: flex;
+  flex-direction: column; /* Stack content vertically */
+  align-items: center; /* Center content within the card */
+  background-color: #f8f8f8; /* Light background for the card */
+  border: 1px solid #ccc; /* Border for separation */
+  border-radius: 8px; /* Rounded corners */
+  padding: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  flex: 1 1 300px; /* Flex-grow, flex-shrink, and base width */
+  max-width: 300px; /* Optional: prevent the card from becoming too large */
+}
+
+#inv-display li:hover {
+  transform: translate(-.25em, -.25em);
+  transition: .5s;
+}
+
+#inv-display li a {
+  text-decoration: none;
+  color: var(--primary-color);
+}
+
+#inv-display li a:hover {
+  color: var(--secondary-color);
+}
+
+#inv-display li span {
+  font-size: 1.5em;
+}
+
+/* Vehicle View */
+
+#vehicle-image {
+  width: 100%;
+}
+
+#vehicle-image img {
+  width: 100%;
+}
+
+#vehicle-page-title {
+  margin-bottom: 0;
+}
+
+#vehicle-information {
+  margin: 1em;
+}
+
+#price {
+  margin-top: 0;
+  font-size: 1.5em;
+  color: var(--secondary-color);
+  font-weight: bold;
 }

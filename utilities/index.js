@@ -57,6 +57,24 @@ Util.buildClassificationGrid = async function(data){
     return grid
   }
 
+  /* **************************************
+* Build the vehicle view HTML
+* ************************************ */
+Util.buildVehicleDisplayGrid = async function(data) {
+  let grid
+  if(data.length > 0){
+    grid = '<section id="vehicle-details">'
+    grid += '<p id="price">$' + new Intl.NumberFormat('en-US').format(data[0].inv_price) + '</p>';
+    grid += '<p id="description">' + data[0].inv_description + '</p>';
+    grid += '<p id="mileage">Mileage: ' + new Intl.NumberFormat('en-US').format(data[0].inv_miles) + ' miles</p>';
+    grid += '<p id="color">Color: ' + data[0].inv_color + '</p>';
+    grid += '</section>'
+  } else { 
+    grid += '<p class="notice">Sorry, no matching vehicles could be found.</p>'
+  }
+  return grid
+}
+
 /* ****************************************
  * Middleware For Handling Errors
  * Wrap other function in this for 

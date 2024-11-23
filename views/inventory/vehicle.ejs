@@ -1,0 +1,16 @@
+<% if (title) { %>
+    <% if (vehicleImage) { %>
+      <div id="vehicle-image">
+        <img src="<%= vehicleImage %>" alt="Image of <%= title %> on CSE Motors">
+      </div>
+    <% } %>
+    <div id="vehicle-information">
+    <h1 id="vehicle-page-title"><%= title %></h1>
+    <% } else {
+      res.redirect('/')
+    } %>
+
+    <%# messages() %>
+
+    <%- grid %>
+  </div>

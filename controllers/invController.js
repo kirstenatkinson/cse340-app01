@@ -3,6 +3,7 @@ const utilities = require("../utilities/")
 
 const invCont = {}
 const vehicleCont = {}
+const errorCont = {}
 
 /* ***************************
  *  Build inventory by classification view
@@ -50,6 +51,20 @@ vehicleCont.buildByVehicleId = async function (req, res, next) {
 }
 };
 
+errorCont.error = async function (req,res, next) {
+  try {
+    // Intentionally introduce an error, such as referencing an undefined variable
+    const vehicleYear = undefinedVariable; // This will throw a ReferenceError
+
+    res.send("This line will never execute due to the error above.");
+  } catch (err) {
+    console.error("Intentional error triggered:", err);
+    // Pass the error to the next middleware for handling
+    next(err);
+  }
+};
+
 module.exports = {
   buildByClassificationId: invCont.buildByClassificationId, 
-  buildByVehicleId: vehicleCont.buildByVehicleId}
+  buildByVehicleId: vehicleCont.buildByVehicleId,
+  error: errorCont.error}

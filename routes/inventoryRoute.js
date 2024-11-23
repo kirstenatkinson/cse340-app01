@@ -8,4 +8,6 @@ router.get("/type/:classificationId", invController.buildByClassificationId);
 
 router.get("/detail/:invId", invController.buildByVehicleId);
 
+router.get("/error", invController.error);
+
 module.exports = router;

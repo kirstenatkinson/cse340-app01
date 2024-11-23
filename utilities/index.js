@@ -75,6 +75,16 @@ Util.buildVehicleDisplayGrid = async function(data) {
   return grid
 }
 
+Util.errorGrid = async function(data) {
+  let grid
+  if(data.length > 0){
+    grid = '<p>This is an error page</p>'
+  } else {
+    grid += '<p class="notice">Sorry, no error page could be found.</p>'
+  }
+  return grid
+}
+
 /* ****************************************
  * Middleware For Handling Errors
  * Wrap other function in this for 

@@ -52,20 +52,23 @@ header {
 /* Nav */
 nav ul {
   display: flex;
+  flex-wrap: wrap;
   margin: 0;
   padding: 0;
-  justify-content: space-between;
+  justify-content: center;
   background-color: var(--primary-color);
 }
 
 nav ul li {
   list-style-type: none;
-  padding: 1em;
+  padding: 1em 2em;
 }
 
 nav ul li a {
   text-decoration: none;
   color: white;
+  width: 100%;
+  height: 100%;
 }
 
 nav ul li:hover {
@@ -150,52 +153,6 @@ nav ul li:hover {
   grid-column: 2 / 3;
 }
 
-@media only screen and (min-width: 900px) {
-  body {
-    background-image: url(/images/site/checkerboard.jpg);
-    background-repeat: repeat;
-    background-size: 20em 20em;
-  }
-
-  #wrapper {
-    background-color: white;
-    margin: 1em 5em;
-    border: .25em solid var(--secondary-color);
-    border-radius: 1em;
-  }
-
-  header {
-    padding: .5em;
-  }
-
-  main {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-  }
-
-  #featured-car {
-    grid-column: span 2;
-  }
-
-  #reviews {
-    grid-column: 2 / 3;
-  }
-
-  #upgrades {
-    grid-column: 1 / 2;
-    grid-row: 3 / 4;
-  }
-
-  main.vehicle-view {
-    grid-template-columns: 3fr 2fr;
-  }
-
-  #vehicle-image {
-    padding: 1em 0 1em 1em;
-  }
-
-}
-
 /* Classification View */
 
 main.classification-view {
@@ -271,4 +228,94 @@ main.classification-view {
   font-size: 1.5em;
   color: var(--secondary-color);
   font-weight: bold;
+}
+
+#mileage, 
+#color {
+  font-weight: bold;
+}
+
+@media only screen and (min-width: 900px) {
+  body {
+    background-image: url(/images/site/checkerboard.jpg);
+    background-repeat: repeat;
+    background-size: 20em 20em;
+  }
+
+  #wrapper {
+    background-color: white;
+    margin: 1em 5em;
+    border: .25em solid var(--secondary-color);
+    border-radius: 1em;
+  }
+
+  header {
+    padding: .5em;
+  }
+
+  main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 1em;
+  }
+
+  main.home {
+    max-width: 900px;
+    margin: auto;
+    border-style: none solid none solid;
+    border-color:#ccc;
+    border-width: .1em;
+    padding: .5em;
+  }
+
+  h1 {
+    font-size: 3em;
+  }
+
+  p {
+    font-size: 2em;
+  }
+
+  #featured-car {
+    grid-column: span 2;
+  }
+
+  #featured-car div {
+    width: 300px;
+  }
+
+  #reviews {
+    grid-column: 2 / 3;
+  }
+
+  #upgrades {
+    grid-column: 1 / 2;
+    grid-row: 3 / 4;
+  }
+
+  main.vehicle-view {
+    grid-template-columns: 3fr 2fr;
+  }
+
+  #vehicle-image {
+    padding: 1em 0 1em 1em;
+  }
+
+  #vehicle-information {
+    padding-left: 1em;
+    border-left: .1em solid #ccc;
+  }
+
+  #price {
+    font-size: 2.5em;
+  }
+
+  main.error-view {
+    display: block;
+    margin: 1em;
+  }
+
+  #error-image img{
+    width: 100%;
+  }
 }

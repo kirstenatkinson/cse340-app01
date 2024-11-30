@@ -1,0 +1,28 @@
+<% if (title) { %>
+    <h1 id="registration-page-title"><%= title %></h1>
+    <% } else {
+      res.redirect('/')
+    } %>
+
+    <%# messages() %>
+
+    <form action="/account/register" method="post" id="registration-form">
+        <fieldset id="registration-information">
+            <p>*Required</p>
+            <label for="account_firstname">First name*</label>
+            <input type="text" name="account_firstname">
+            <label for="account_lastname">Last name*</label>
+            <input type="text" name="account_lastname">
+            <label for="account_email">Email*</label>
+            <input type="email" name="account_email">
+            <label for="password">Password*</label>
+            <input type="password" name="account_password">
+            <ul>
+                <li>12 characters in length, minimum</li>
+                <li>Contain at least 1 capital letter</li>
+                <li>Contain at least 1 number</li>
+                <li>Contain at least 1 special character</li>
+            </ul>
+        </fieldset>
+        <input type="submit" id="registration-submit" value="Create Account">
+    </form>

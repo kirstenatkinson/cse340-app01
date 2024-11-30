@@ -235,6 +235,91 @@ main.classification-view {
   font-weight: bold;
 }
 
+/*Account Views*/
+#login-page-title, #registration-page-title {
+  text-align: center;
+}
+#login-form {
+  background-color: var(--primary-color);
+  width: 75%;
+  max-width: 700px;
+  margin: auto;
+  padding: 2em;
+  font-size: large;
+  border-radius: 1em;
+  color: white;
+}
+
+#registration-form {
+  width: 75%;
+  max-width: 700px;
+  margin: auto;
+}
+
+#login-information, #registration-information {
+  margin: auto;
+  width: 80%;
+  border: none;
+}
+
+#login-form label, #registration-form label {
+  display: block;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+#login-information input, #registration-information input {
+  border-radius: .5em;
+  padding: .5em;
+  margin-bottom: 2.5em;
+  width: 100%;
+}
+
+#registration-information input {
+  border: none;
+  border-bottom: 0.2em solid var(--primary-color);
+  border-radius: 0;
+}
+
+#registration-information input:hover {
+  border: none;
+  border-bottom: 0.2em solid var(--secondary-color);
+  border-radius: 0;
+}
+
+#login-submit, #registration-submit {
+  padding: 1em 3em;
+  display: block;
+  margin: auto;
+  border: none;
+  border-radius: .5em;
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+#login-form p {
+  text-align: center;
+}
+
+#login-form p a {
+  color: var(--secondary-color);
+}
+
+#registration-information ul {
+  padding: 0;
+  margin-top: 0;
+}
+
+#registration-form p,
+#registration-information ul li {
+  color:rgb(119, 119, 119);
+  list-style-type: none;
+  font-style: italic;
+  font-size: 1em;
+}
+
 @media only screen and (min-width: 900px) {
   body {
     background-image: url(/images/site/checkerboard.jpg);
@@ -317,5 +402,9 @@ main.classification-view {
 
   #error-image img{
     width: 100%;
+  }
+
+  main.login-view, main.registration-view {
+    display: block;
   }
 }

@@ -18,7 +18,8 @@ invCont.buildByClassificationId = async function (req, res, next) {
     title: className + " vehicles",
     nav,
     grid,
-    mainClass: "classification-view"
+    mainClass: "classification-view",
+    errors: null,
   })
 }
 
@@ -43,7 +44,8 @@ vehicleCont.buildByVehicleId = async function (req, res, next) {
     nav,
     vehicleImage,
     grid,
-    mainClass: "vehicle-view"
+    mainClass: "vehicle-view",
+    errors: null,
   })
 } catch (err) {
   console.error(err);

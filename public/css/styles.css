@@ -320,6 +320,12 @@ main.classification-view {
   font-size: 1em;
 }
 
+form input:required:invalid,
+form input:focus:invalid {
+  border-color: red;
+}
+
+
 @media only screen and (min-width: 900px) {
   body {
     background-image: url(/images/site/checkerboard.jpg);

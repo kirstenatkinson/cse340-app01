@@ -9,7 +9,8 @@ async function buildLogin(req, res, next) {
     res.render("account/login", {
       title: "Login",
       nav,
-      mainClass: "login-view"
+      mainClass: "login-view",
+      errors: null,
     })
   }
   
@@ -21,7 +22,8 @@ async function buildRegister(req, res, next) {
     res.render("account/register", {
       title: "Register",
       nav,
-      mainClass: "registration-view"
+      mainClass: "registration-view",
+      errors: null,
     })
   }
   
@@ -53,6 +55,7 @@ async function registerAccount(req, res) {
       res.status(501).render("account/register", {
         title: "Registration",
         nav,
+        errors: null,
       })
     }
   }

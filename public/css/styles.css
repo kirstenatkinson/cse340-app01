@@ -236,7 +236,9 @@ main.classification-view {
 }
 
 /*Account Views*/
-#login-page-title, #registration-page-title {
+#login-page-title,
+#registration-page-title,
+#add-inventory-page-title {
   text-align: center;
 }
 #login-form {
@@ -250,44 +252,53 @@ main.classification-view {
   color: white;
 }
 
-#registration-form {
+#registration-form,
+#add-inventory-form {
   width: 75%;
   max-width: 700px;
   margin: auto;
 }
 
-#login-information, #registration-information {
+#login-information, 
+#registration-information,
+#new-inventory-information {
   margin: auto;
   width: 80%;
   border: none;
 }
 
-#login-form label, #registration-form label {
+#login-form label,
+#registration-form label,
+#add-inventory-form label {
   display: block;
   text-transform: uppercase;
   font-weight: bold;
 }
 
-#login-information input, #registration-information input {
+#login-information input, 
+#registration-information input,  
+#add-inventory-form input {
   border-radius: .5em;
   padding: .5em;
   margin-bottom: 2.5em;
   width: 100%;
 }
 
-#registration-information input {
+#registration-information input,
+#add-inventory-form input {
   border: none;
   border-bottom: 0.2em solid var(--primary-color);
   border-radius: 0;
 }
 
-#registration-information input:hover {
+#registration-information input:hover, 
+#add-inventory-form input:hover {
   border: none;
   border-bottom: 0.2em solid var(--secondary-color);
   border-radius: 0;
 }
 
-#login-submit, #registration-submit {
+#login-submit, #registration-submit, #new-inventory-submit {
   padding: 1em 3em;
   display: block;
   margin: auto;
@@ -410,7 +421,7 @@ form input:focus:invalid {
     width: 100%;
   }
 
-  main.login-view, main.registration-view {
+  main.login-view, main.registration-view, main.management-view {
     display: block;
   }
 }

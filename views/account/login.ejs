@@ -4,19 +4,22 @@
       res.redirect('/')
     } %>
 
-    <%# messages() %>
-    <% if (errors) { %>
+    <% if (notice && notice.length > 0) { %>
+      <div class="notice-message">
+        <%= notice %>
+      </div>
+    <% } %>
+    <% if (errors && errors.array) { %>
         <ul class="notice">
-       <% errors.array().forEach(error => { %>
-         <li><%= error.msg %></li>
-      <%  }) %>
-       </ul>
-      <% } %>
-
+           <% errors.array().forEach(error => { %>
+             <li><%= error.msg %></li>
+           <% }) %>
+        </ul>
+    <% } %>
     <form id="login-form" action="/account/login" method="post">
         <fieldset id="login-information">
             <label for="account_email">Email:</label>
-            <input type="email" name="account_email" required value="<%= locals.account_email %>>
+            <input type="email" name="account_email" required value="<%= locals.account_email %>">
             <label for="account_password">Password:</label>
             <input type="password" name="account_password" required>
         </fieldset>

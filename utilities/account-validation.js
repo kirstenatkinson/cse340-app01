@@ -77,7 +77,6 @@ validate.checkRegData = async (req, res, next) => {
   *  Login Data Validation Rules
   * ********************************* */
   validate.loginRules = () => {
-    console.log("loginRules middleware running");
     return [
       body("account_email")
         .trim()
@@ -98,7 +97,6 @@ validate.checkRegData = async (req, res, next) => {
 * Check data and return errors or continue to registration
 * ***************************** */
 validate.checkLoginData = async (req, res, next) => {
-  console.log("checkLoginData middleware running");
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     console.log("Validation errors:", errors.array());

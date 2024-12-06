@@ -15,7 +15,11 @@ router.get("/register", utilities.handleErrors(accountController.buildRegister))
 router.post('/register', regValidate.registationRules(), regValidate.checkRegData, utilities.handleErrors(accountController.registerAccount))
 
 // Login to Account Route
-router.post("/login",  regValidate.loginRules(), regValidate.checkLoginData, utilities.handleErrors(accountController.accountLogin))
+router.post("/login",  
+  (req, res, next) => {
+    console.log("Login route hit!");
+    next(); // Ensure subsequent middleware runs
+  }, regValidate.loginRules(), regValidate.checkLoginData, utilities.handleErrors(accountController.accountLogin))
 
 // Account Management Route
 router.get("/", utilities.handleErrors(accountController.buildAccount))

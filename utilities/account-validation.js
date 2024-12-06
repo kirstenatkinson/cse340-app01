@@ -76,55 +76,39 @@ validate.checkRegData = async (req, res, next) => {
   /*  **********************************
   *  Login Data Validation Rules
   * ********************************* */
-validate.loginRules = () => {
-  return [
-    // valid email is required and must already exist in the DB
-    body("account_email")
-    .trim()
-    .escape()
-    .notEmpty()
-    .isEmail()
-    .normalizeEmail() // refer to validator.js docs
-    .withMessage("Please provide a valid email.")
-    .custom(async (account_email) => {
-      const emailExists = await accountModel.checkExistingEmail(account_email)
-      if (!emailExists){
-        throw new Error("Email or password is incorrect. Please try again")
-      }
-    }),
-
-    // lastname is required and must be string
-    body("account_password")
-      .trim()
-      .escape()
-      .notEmpty()
-      .withMessage("Please provide a password.") // on error this message is sent.
-      .custom(async (account_password, { req }) => {
-        const isValid = await accountModel.verifyPassword(req.body.account_email, account_password);
-        if (!isValid) {
-          throw new Error("Email or password is incorrect. Please try again.");
-        }
-      }),
-  ]
-}
+  validate.loginRules = () => {
+    console.log("loginRules middleware running");
+    return [
+      body("account_email")
+        .trim()
+        .escape()
+        .notEmpty()
+        .isEmail()
+        .normalizeEmail()
+        .withMessage("Please provide a valid email."),
+      body("account_password")
+        .trim()
+        .escape()
+        .notEmpty()
+        .withMessage("Password is required."),
+    ];
+  };
 
 /* ******************************
 * Check data and return errors or continue to registration
 * ***************************** */
 validate.checkLoginData = async (req, res, next) => {
-  const { account_email} = req.body
-  const errors = validationResult(req)
+  console.log("checkLoginData middleware running");
+  const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    let nav = await utilities.getNav()
-    res.render("account/account", {
+    console.log("Validation errors:", errors.array());
+    return res.status(400).render("account/login", {
+      title: "Login",
+      nav: await utilities.getNav(),
       errors: errors.array(),
-      title: `Welcome to your account!`,
-      nav,
-      account_email,
-    })
-    return
+    });
   }
-  next()
-}
+  next();
+};
   
   module.exports = validate

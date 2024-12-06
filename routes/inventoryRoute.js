@@ -29,4 +29,10 @@ router.post('/add-classification', validate.addClassRules(), validate.checkClass
 // Route to submit inventory form
 router.post("/add-inventory", validate.checkInventoryData, utilities.handleErrors(invController.addInventory));
 
+// Get delete
+//router.get("/delete/:inv_id", utilities.handleErrors(invController.builDelete))
+
+// Delete inventory
+//router.post("/delete/", utilities.handleErrors(invController.deleteInventory))
+
 module.exports = router;

@@ -27,13 +27,16 @@ router.get("/add-inventory", utilities.handleErrors(invController.buildAddInvent
 router.post('/add-classification', validate.addClassRules(), validate.checkClassData, utilities.handleErrors(invController.addClassification));
 
 // Route to submit inventory form
-router.post("/add-inventory", validate.checkInventoryData, utilities.handleErrors(invController.addInventory));
+router.post("/add-inventory", validate.newInventoryRules(), validate.checkInventoryData, utilities.handleErrors(invController.addInventory));
 
 // Route to get inventory json from inventory.js
 router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
 
 // Route to build inventory edit view
 router.get("/edit/:invId", utilities.handleErrors(invController.buildEditInventory))
+
+// Route to edit inventory
+router.post("/update/", validate.newInventoryRules(), validate.checkUpdateData, utilities.handleErrors(invController.updateInventory))
 
 // Get delete
 //router.get("/delete/:inv_id", utilities.handleErrors(invController.builDelete))

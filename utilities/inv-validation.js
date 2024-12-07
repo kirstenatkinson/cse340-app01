@@ -133,7 +133,7 @@ validate.newInventoryRules = () => {
  * Check data and return errors or continue to add inventory
  * ***************************** */
   validate.checkInventoryData = async (req, res, next) => {
-    const { inv_make, inv_model, inv_year, inv_description, inv_price, inv_miles, inv_color } = req.body
+    const { inv_make, inv_model, inv_year, inv_description, inv_price, inv_miles, inv_color, inv_image, inv_thumbnail } = req.body
     let errors = validationResult(req)
     if (!errors.isEmpty()) {
         let nav = await utilities.getNav()

@@ -110,6 +110,22 @@ validate.newInventoryRules = () => {
       .optional()
       .matches(/^[a-zA-Z\s]+$/)
       .withMessage("Color can only contain alphabetic characters and spaces."),
+
+    // Image Path Validation - should start with '/images/vehicles/' and end with a valid image extension
+    body("inv_image")
+    .trim()
+    .notEmpty()
+    .withMessage("Please provide a valid image path for the vehicle.")
+    .matches(/^\/images\/vehicles\/[a-zA-Z0-9\-_.]+\.(jpg|jpeg|png|gif|webp)$/)
+    .withMessage("Image path must be a valid image file located under '/images/vehicles/' with a valid extension (e.g., .jpg, .png, .gif, .webp)."),
+
+    // Thumbnail Image Path Validation - should follow similar rules to the main image path
+    body("inv_thumbnail")
+      .trim()
+      .notEmpty()
+      .withMessage("Please provide a valid thumbnail image path.")
+      .matches(/^\/images\/vehicles\/[a-zA-Z0-9\-_.]+\.(jpg|jpeg|png|gif|webp)$/)
+      .withMessage("Thumbnail image path must be a valid image file located under '/images/vehicles/' with a valid extension (e.g., .jpg, .png, .gif, .webp).")
   ];
 };
 

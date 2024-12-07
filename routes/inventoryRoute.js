@@ -6,7 +6,7 @@ const invController = require("../controllers/invController")
 const validate = require('../utilities/inv-validation')
 
 //Route to manage
-router.get("/", utilities.handleErrors(invController.buildManagement));
+router.get("/", utilities.checkLogin, utilities.handleErrors(invController.buildManagement));
 
 // Route to build inventory by classification view
 router.get("/type/:classificationId", utilities.handleErrors(invController.buildByClassificationId));
@@ -39,10 +39,7 @@ router.get("/edit/:invId", utilities.handleErrors(invController.buildEditInvento
 router.post("/update/", validate.newInventoryRules(), validate.checkUpdateData, utilities.handleErrors(invController.updateInventory))
 
 // Get delete
-router.get("/delete/:inv_id", (req, res, next) => {
-    console.log("Delete route hit, inv_id:", req.params.inv_id); // Log when the route is accessed
-    next(); // Pass control to the next middleware
-  }, utilities.handleErrors(invController.buildDelete));
+router.get("/delete/:inv_id", utilities.handleErrors(invController.buildDelete));
 // Delete inventory
 router.post("/delete/", utilities.handleErrors(invController.deleteInventory))
 

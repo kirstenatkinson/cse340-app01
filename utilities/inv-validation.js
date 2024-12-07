@@ -134,6 +134,9 @@ validate.newInventoryRules = () => {
             inv_price,
             inv_miles,
             inv_color,
+            inv_image,
+            inv_thumbnail,
+            mainClass: "management-view"
         })
         return
     }

@@ -27,6 +27,7 @@ async function getInventoryByClassificationId(classification_id) {
 
 async function getVehicleById (vehicle_id) {
     try {
+      console.log(vehicle_id)
       const data = await pool.query(
         `SELECT * FROM public.inventory
         WHERE inv_id = ${vehicle_id}`
@@ -101,4 +102,18 @@ async function updateInventory(
   }
 }
 
-  module.exports = {getClassifications, getInventoryByClassificationId, getVehicleById, addClassification, addInventory, updateInventory};
+/* ***************************
+ *  Delete Inventory Data
+ * ************************** */
+async function deleteInventory(inv_id) {
+  try {
+    const sql =
+      "DELETE FROM inventory WHERE inv_id = $1;"
+    const data = await pool.query(sql, [inv_id])
+    return data
+  } catch (error) {
+    console.error("Delete Inventory Error: " + error)
+  }
+}
+
+  module.exports = {getClassifications, getInventoryByClassificationId, getVehicleById, addClassification, addInventory, updateInventory, deleteInventory};

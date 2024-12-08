@@ -172,10 +172,15 @@ async function updateAccount(req, res, next) {
   )
 
   if (updateResult) {
-          // Update session data with the new values
-          req.session.account_firstname = account_firstname;
-          req.session.account_lastname = account_lastname;
-          req.session.account_email = account_email;
+    // Create new JWT with updated account data
+    const updatedAccount = { account_id, account_firstname, account_lastname, account_email };
+    const token = jwt.sign(updatedAccount, process.env.ACCESS_TOKEN_SECRET, {
+     expiresIn: "1h", // Adjust as needed
+    });
+
+    // Set the new JWT in cookies
+    res.cookie("jwt", token, { httpOnly: true });
+
     req.flash("notice", `Your account was successfully updated.`)
     res.redirect("/account")
   } else {

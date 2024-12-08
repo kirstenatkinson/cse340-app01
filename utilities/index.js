@@ -152,21 +152,32 @@ Util.checkLogin = (req, res, next) => {
   }
  }
 
- /* ****************************************
- * Middleware to check if user is Employee or Admin
- **************************************** */
-Util.checkAdminPrivileges = (req, res, next) => {
+ Util.checkAdminPrivileges = async (req, res, next) => {
   if (req.cookies.jwt) {
-    jwt.verify(req.cookies.jwt, process.env.ACCESS_TOKEN_SECRET, (err, accountData) => {
+    jwt.verify(req.cookies.jwt, process.env.ACCESS_TOKEN_SECRET, async (err, accountData) => {
       if (err) {
         req.flash("notice", "Please log in with an authorized account.");
         res.clearCookie("jwt");
         return res.redirect("/account/login");
       }
-      if (accountData.account_type === "Employee" || accountData.account_type === "Admin") {
-        next(); // Authorized access
-      } else {
-        req.flash("notice", "You do not have permission to access this page.");
+      try {
+        const updatedAccountData = await accountModel.getAccountById(accountData.account_id);
+        if (
+          updatedAccountData &&
+          (updatedAccountData.account_type === "Employee" || updatedAccountData.account_type === "Admin")
+        ) {
+          // Attach updated account data to `res.locals` for use in views
+          res.locals.accountData = updatedAccountData;
+          res.locals.loggedin = true;
+          next(); // Authorized access
+        } else {
+          req.flash("notice", "You do not have permission to access this page.");
+          return res.redirect("/account/login");
+        }
+      } catch (error) {
+        console.error("Error fetching account data:", error);
+        req.flash("notice", "An error occurred while verifying your account. Please log in again.");
+        res.clearCookie("jwt");
         return res.redirect("/account/login");
       }
     });

@@ -156,7 +156,6 @@ validate.updateAccountRules = () => {
  * Check data and return errors or continue to update
  * ***************************** */
   validate.checkUpdateData = async (req, res, next) => {
-    console.log("Validating update information!")
     const { account_firstname, account_lastname, account_email, account_id } = req.body
     const errors = validationResult(req)
     if (!errors.isEmpty()) {

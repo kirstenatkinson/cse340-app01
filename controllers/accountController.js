@@ -100,7 +100,6 @@ async function accountLogin(req, res) {
       console.log("Generated JWT:", accessToken)
       if(process.env.NODE_ENV === 'development') {
         res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 })
-        console.log("JWT cookie set")
       } else {
         res.cookie("jwt", accessToken, { httpOnly: true, secure: true, maxAge: 3600 * 1000 })
       }
@@ -126,15 +125,129 @@ async function accountLogin(req, res) {
 async function buildAccount(req, res, next) {
   let nav = await utilities.getNav()
   res.render("account/account", {
-    title: "Register",
+    title: "Account Management",
     nav,
-    mainClass: "account-view",
+    mainClass: "management-view",
     errors: null,
   })
+}
+
+/* ***************************
+ *  Deliver Update Account View by Account Id
+ * ************************** */
+async function buildUpdateAccount(req, res, next) {
+  const account_id = parseInt(req.params.account_id)
+  let nav = await utilities.getNav()
+  const userData = await accountModel.getAccountById(account_id)
+  res.render("account/update", {
+    title: "Update Account",
+    nav,
+    errors: null,
+    account_id: userData.account_id,
+    account_firstname: userData.account_firstname,
+    account_lastname: userData.account_lastname,
+    account_email: userData.account_email,
+    mainClass: "management-view"
+  })
+}
+
+/* ***************************
+ *  Update Account Data
+ * ************************** */
+async function updateAccount(req, res, next) {
+  let nav = await utilities.getNav()
+
+  console.log("Updating account:", req.body)
+  const {
+    account_firstname,
+    account_lastname,
+    account_email,
+    account_id,
+  } = req.body
+  const updateResult = await accountModel.updateAccount (
+    account_firstname,
+    account_lastname,
+    account_email,
+    account_id,
+  )
+
+  if (updateResult) {
+          // Update session data with the new values
+          req.session.account_firstname = account_firstname;
+          req.session.account_lastname = account_lastname;
+          req.session.account_email = account_email;
+    req.flash("notice", `Your account was successfully updated.`)
+    res.redirect("/account")
+  } else {
+    console.log("Update failed")
+    req.flash("notice", "Sorry, the update failed.")
+    res.status(501).render("account/update", {
+    title: "Update Account",
+    nav,
+    errors: null,
+    account_firstname,
+    account_lastname,
+    account_email,
+    account_id,
+    mainClass: "management-view"
+    })
+  }
+}
+
+/* ****************************************
+*  Process Password Change
+* *************************************** */
+async function updatePassword(req, res) {
+  let nav = await utilities.getNav()
+  const { account_firstname, account_lastname, account_email, account_password, account_id } = req.body
+
+  // Hash the password before storing
+  let hashedPassword
+  try {
+      // regular password and cost (salt is generated automatically)
+      hashedPassword = await bcrypt.hashSync(account_password, 10)
+  } catch (error) {
+      req.flash("notice", 'Sorry, there was an error processing the update.')
+      res.status(500).render("account/update/", {
+      title: "Update Account",
+      nav,
+      account_id,
+      account_firstname,
+      account_lastname,
+      account_email,
+      errors: null,
+      mainClass: "management-view"
+      })
+  }
+
+  const updatePasswordResult = await accountModel.updatePassword(
+    account_id,
+    hashedPassword
+  )
+
+  if (updatePasswordResult) {
+    req.flash(
+      "notice",
+      `Password successfully updated.`
+    )
+    res.status(201).redirect("/account")
+  } else {
+    req.flash("notice", "Sorry, the update failed.")
+    res.status(501).render("account/update", {
+      title: "Update Account",
+      nav,
+      account_id,
+      errors: null,
+      mainClass: "management-view"
+    })
+  }
 }
 
   module.exports = { buildLogin, 
     buildRegister, 
     registerAccount, 
     accountLogin, 
-    buildAccount }
+    buildAccount,
+    buildUpdateAccount,
+    updateAccount,
+    updatePassword }

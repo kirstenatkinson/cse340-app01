@@ -1,0 +1,69 @@
+<% if (title) { %>
+    <h1 id="update-account-page-title"><%= title %></h1>
+    <% } else {
+      res.redirect('/')
+    } %>
+
+    <% if (notice && notice.length > 0) { %>
+      <div class="notice-message">
+        <%= notice %>
+      </div>
+    <% } %>
+<% if (error && error.length > 0) { %>
+  <ul class="error">
+    <% error.forEach(err => { %> <!-- Use 'err' to access each error object -->
+      <li><%= err.msg %></li> <!-- Render the 'msg' property -->
+    <% }) %>
+  </ul>
+<% } %>
+
+    <form action="/account/update" method="post" id="updateForm">
+        <fieldset id="updated-personal-information">
+            <legend>User Information</legend>
+            
+            <label for="account_firstname">First Name</label>
+            <input type="text" name="account_firstname" id="account_firstname" required value="<%= locals.account_firstname || '' %>">
+        
+            <label for="account_lastname">Last Name</label>
+            <input type="text" name="account_lastname" id="account_lastname" required value="<%= locals.account_lastname || '' %>">
+        
+            <label for="account_email">Email</label>
+            <input type="email" name="account_email" id="account_email" required value="<%= locals.account_email || '' %>">
+        </fieldset>
+        <input type="submit" id="updateFormSubmit" value="Update Account" disabled>
+        <input type="hidden" name="account_id"
+        <% if(locals.account_id) { %> value="<%= locals.account_id %>"
+        <% } %>>
+    </form>
+    <form action="/account/update/update-password" method="post" id="update-password-form">
+        <legend>Change Password</legend>
+
+        <p>By submitting a new password below, it will change your account's current password.</p>
+
+        <label for="account_password">Enter New Password</label>
+        <input type="password" name="account_password" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$">
+
+        <p>Password must include:</p>
+        <ul>
+            <li>12 characters in length, minimum</li>
+            <li>Contain at least 1 capital letter</li>
+            <li>Contain at least 1 number</li>
+            <li>Contain at least 1 special character</li>
+        </ul>
+        <input type="submit" id="updatePasswordSubmit" value="Change Password">
+        <input type="hidden" name="account_id"
+        <% if(locals.account_id) { %> value="<%= locals.account_id %>"
+        <% } %>>
+        <input type="hidden" name="account_firstname"
+        <% if(locals.account_firstname) { %> value="<%= locals.account_firstname %>"
+        <% } %>>
+        <input type="hidden" name="account_lastname"
+        <% if(locals.account_lastname) { %> value="<%= locals.account_lastname %>"
+        <% } %>>
+        <input type="hidden" name="account_email"
+        <% if(locals.account_email) { %> value="<%= locals.account_email %>"
+        <% } %>>
+
+    </form>
+
+    <script src="../../js/inv-update.js"></script>

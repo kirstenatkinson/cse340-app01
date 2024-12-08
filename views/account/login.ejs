@@ -19,9 +19,9 @@
     <form id="login-form" action="/account/login" method="post">
         <fieldset id="login-information">
             <label for="account_email">Email:</label>
-            <input type="email" name="account_email" required value="<%= locals.account_email %>">
+            <input type="email" name="account_email" id="account_email" required value="<%= locals.account_email %>">
             <label for="account_password">Password:</label>
-            <input type="password" name="account_password" required>
+            <input type="password" id="account_password" name="account_password" required>
         </fieldset>
         <input type="submit" id="login-submit" value="Login">
         <p>No account? <a href="/account/register">Sign-up</a></p>

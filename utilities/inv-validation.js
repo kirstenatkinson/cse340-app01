@@ -163,7 +163,7 @@ validate.newInventoryRules = () => {
  * Check data and return errors or continue to update inventory
  * ***************************** */
 validate.checkUpdateData = async (req, res, next) => {
-  const { inv_make, inv_model, inv_year, inv_description, inv_price, inv_miles, inv_color } = req.body
+  const { inv_id, inv_make, inv_model, inv_year, inv_description, inv_price, inv_miles, inv_color, inv_image, inv_thumbnail } = req.body
   let errors = validationResult(req)
   if (!errors.isEmpty()) {
       let nav = await utilities.getNav()
@@ -171,7 +171,7 @@ validate.checkUpdateData = async (req, res, next) => {
       res.render("inventory/edit-inventory", {
           title: "Edit Inventory",
           nav,
-          classificationList,
+          classificationSelect: classificationList,
           errors,
           inv_make,
           inv_model,
@@ -180,6 +180,8 @@ validate.checkUpdateData = async (req, res, next) => {
           inv_price,
           inv_miles,
           inv_color,
+          inv_image,
+          inv_thumbnail,
           inv_id
       })
       return

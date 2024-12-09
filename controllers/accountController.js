@@ -97,7 +97,6 @@ async function accountLogin(req, res) {
     if (await bcrypt.compare(account_password, accountData.account_password)) {
       delete accountData.account_password
       const accessToken = jwt.sign(accountData, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 * 1000 })
-      console.log("Generated JWT:", accessToken)
       if(process.env.NODE_ENV === 'development') {
         res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 })
       } else {
@@ -184,7 +183,6 @@ async function updateAccount(req, res, next) {
     req.flash("notice", `Your account was successfully updated.`)
     res.redirect("/account")
   } else {
-    console.log("Update failed")
     req.flash("notice", "Sorry, the update failed.")
     res.status(501).render("account/update", {
     title: "Update Account",

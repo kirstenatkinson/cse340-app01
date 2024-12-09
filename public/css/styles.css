@@ -236,9 +236,7 @@ main.classification-view {
 }
 
 /*Account Views*/
-#login-page-title,
-#registration-page-title,
-#add-inventory-page-title {
+.management-view h1{
   text-align: center;
 }
 #login-form {
@@ -253,7 +251,9 @@ main.classification-view {
 }
 
 #registration-form,
-#add-inventory-form {
+#add-inventory-form,
+#updateForm,
+#add-classification-form {
   width: 75%;
   max-width: 700px;
   margin: auto;
@@ -261,7 +261,9 @@ main.classification-view {
 
 #login-information, 
 #registration-information,
-#new-inventory-information {
+#new-inventory-information,
+#updated-inventory-information,
+#classification-information {
   margin: auto;
   width: 80%;
   border: none;
@@ -269,36 +271,41 @@ main.classification-view {
 
 #login-form label,
 #registration-form label,
-#add-inventory-form label {
+#add-inventory-form label,
+#updateForm label,
+#add-classification-form label {
   display: block;
   text-transform: uppercase;
   font-weight: bold;
+  margin-bottom: .25em;
 }
 
 #login-information input, 
 #registration-information input,  
-#add-inventory-form input {
-  border-radius: .5em;
+#new-inventory-information input,
+#updated-inventory-information input,
+#classification-information input {
   padding: .5em;
   margin-bottom: 2.5em;
   width: 100%;
-}
-
-#registration-information input,
-#add-inventory-form input {
   border: none;
   border-bottom: 0.2em solid var(--primary-color);
-  border-radius: 0;
 }
 
 #registration-information input:hover, 
-#add-inventory-form input:hover {
+#add-inventory-form input:hover,
+#updated-inventory-information input:hover,
+#classification-information input:hover {
   border: none;
   border-bottom: 0.2em solid var(--secondary-color);
   border-radius: 0;
 }
 
-#login-submit, #registration-submit, #new-inventory-submit {
+#login-submit, 
+#registration-submit, 
+#new-inventory-submit, 
+#updateFormSubmit,
+#new-classification-submit {
   padding: 1em 3em;
   display: block;
   margin: auto;
@@ -308,6 +315,16 @@ main.classification-view {
   color: var(--primary-color);
   text-transform: uppercase;
   font-weight: bold;
+}
+
+#login-submit:hover, 
+#registration-submit:hover, 
+#new-inventory-submit:hover, 
+#updateFormSubmit:hover,
+#new-classification-submit:hover {
+  background-color: var(--primary-color);
+  color: white;
+  transition: .5s;
 }
 
 #login-form p {
@@ -334,6 +351,22 @@ main.classification-view {
 form input:required:invalid,
 form input:focus:invalid {
   border-color: red;
+}
+
+.error {
+  color: white;
+  list-style-type: none;
+  background-color: red;
+  padding: .5em;
+}
+
+button[disabled],
+input[type="submit"][disabled] {
+  background-color: #cccccc;
+  color: #666666;
+  cursor: not-allowed;
+  opacity: .5;
+  border: 1px solid #999999;
 }
 
 

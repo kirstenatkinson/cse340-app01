@@ -419,7 +419,7 @@ input[type="submit"][disabled] {
     width: 300px;
   }
 
-  #reviews {
+  #featured-reviews {
     grid-column: 2 / 3;
   }
 

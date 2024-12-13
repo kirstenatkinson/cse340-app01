@@ -100,6 +100,29 @@ Util.buildVehicleDisplayGrid = async function(data) {
   return grid
 }
 
+/* **************************************
+* Build the vehicle review list HTML
+* ************************************ */
+Util.buildReviewList = async function(data) {
+  let list = ""
+  if(data.length > 0){
+    list = '<ul id="review-list">'
+    data.forEach(review => { 
+      const displayedName = `${review.account_firstname[0]}${review.account_lastname}`.replace(/\s/g, '')
+      const formatter = new Intl.DateTimeFormat('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
+      const formattedDate = formatter.format(new Date(review.review_date))
+      list += '<li>'
+      list += '<span>'+ displayedName + '</span>'
+      list += '<p class="review-date">Written on ' + formattedDate + '</p>'
+      list += '<p class="review-description">' + review.review_text + '</p>'
+    })
+    list += '</ul>'
+  } else { 
+    list += '<p class="no-reviews">Be the first to write a review!</p>'
+  }
+  return list
+}
+
 Util.errorGrid = async function(data) {
   let grid
   if(data.length > 0){

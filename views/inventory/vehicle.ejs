@@ -14,3 +14,28 @@
 
     <%- grid %>
   </div>
+  <div id="vehicle-reviews">
+    <h2>Reviews</h2>
+    <%- reviewHtml %>
+    <% if (loggedin) { %>
+      <h3>Add Your Own Review</h3>
+      <form id="add-review-form" action="/review" method="POST">
+        <fieldset id="add-review-information">
+          <label for="displayed_name">Displayed Name</label>
+            <input type="text" name="displayed_name" id="displayed_name" readonly value="<%= accountData.account_firstname.charAt(0) + accountData.account_lastname.replace(/\s+/g, '') %>">
+            <label for="review_text">Your Review</label>
+            <textarea 
+              id="review_text" 
+              name="review_text" 
+              required 
+              placeholder="Write your review here"></textarea>
+        </fieldset>
+        <input type="submit" id="review-submit" value="Submit Review">
+        <!-- Hidden fields -->
+        <input type="hidden" name="inv_id" value="<%= inv_id %>" />
+        <input type="hidden" name="account_id" value="<%= accountData.account_id %>" />
+      </form>
+    <% } else { %>
+      <p>You must <a title="Click to log in" href="/account/login">login</a> to write a review.</p>
+    <% } %>
+  </div>

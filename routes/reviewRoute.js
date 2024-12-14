@@ -23,11 +23,16 @@ router.post('/',
     utilities.handleErrors(reviewController.addReview))
 
 // Route to update review
-router.post('/update', 
+router.post('/update/', 
     utilities.checkLogin,
     validate.reviewRules(), 
     validate.checkReviewData, 
     utilities.handleErrors(reviewController.updateReview));
+
+// Route to update review
+router.post('/delete/', 
+    utilities.checkLogin, 
+    utilities.handleErrors(reviewController.deleteReview));
 
 
 module.exports = router;

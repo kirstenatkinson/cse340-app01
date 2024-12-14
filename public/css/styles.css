@@ -253,17 +253,33 @@ main.classification-view {
 #registration-form,
 #add-inventory-form,
 #updateForm,
-#add-classification-form {
+#add-classification-form,
+#delete-review-form,
+#edit-review-form {
   width: 75%;
   max-width: 700px;
   margin: auto;
+}
+
+#delete-review-form,
+#edit-review-form {
+  border: .5em solid var(--secondary-color);
+  border-radius: 1em;
+  padding: 1em;
+}
+
+#delete-review-form p,
+#edit-review-form p {
+  text-align: center;
 }
 
 #login-information, 
 #registration-information,
 #new-inventory-information,
 #updated-inventory-information,
-#classification-information {
+#classification-information,
+#delete-review-information,
+#edit-review-information {
   margin: auto;
   width: 80%;
   border: none;
@@ -273,7 +289,9 @@ main.classification-view {
 #registration-form label,
 #add-inventory-form label,
 #updateForm label,
-#add-classification-form label {
+#add-classification-form label,
+#delete-review-form label,
+#edit-review-form label {
   display: block;
   text-transform: uppercase;
   font-weight: bold;
@@ -292,6 +310,31 @@ main.classification-view {
   border-bottom: 0.2em solid var(--primary-color);
 }
 
+#delete-review-information input,
+#edit-review-information input {
+  background-color: #cccccc;
+  padding: .5em;
+  margin-bottom: 2.5em;
+  width: 100%;
+  border: none;
+}
+
+#new-inventory-information textarea,
+#updated-inventory-information textarea,
+#delete-review-information textarea,
+#edit-review-information textarea {
+  padding: .5em;
+  width: 100%;
+  border: 0.2em solid var(--primary-color);
+}
+
+#new-inventory-information textarea:hover,
+#updated-inventory-information textarea:hover {
+  padding: .5em;
+  width: 100%;
+  border: 0.2em solid var(--secondary-color);
+}
+
 #registration-information input:hover, 
 #add-inventory-form input:hover,
 #updated-inventory-information input:hover,
@@ -305,7 +348,9 @@ main.classification-view {
 #registration-submit, 
 #new-inventory-submit, 
 #updateFormSubmit,
-#new-classification-submit {
+#new-classification-submit,
+#review-delete-submit,
+#review-update-submit {
   padding: 1em 3em;
   display: block;
   margin: auto;
@@ -321,7 +366,9 @@ main.classification-view {
 #registration-submit:hover, 
 #new-inventory-submit:hover, 
 #updateFormSubmit:hover,
-#new-classification-submit:hover {
+#new-classification-submit:hover,
+#review-delete-submit:hover,
+#review-update-submit:hover {
   background-color: var(--primary-color);
   color: white;
   transition: .5s;
@@ -349,8 +396,10 @@ main.classification-view {
 }
 
 form input:required:invalid,
-form input:focus:invalid {
-  border-color: red;
+form input:focus:invalid,
+form textarea:required:invalid,
+form textarea:focus:invalid {
+  background: rgb(236, 125, 125);
 }
 
 .error {

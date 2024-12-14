@@ -91,4 +91,18 @@ async function updateReview (
     }
   }
 
-  module.exports = {getReviewsByVehicleId, addReview, getReviewsByAccountId, getReviewById, updateReview};
+/* ***************************
+ *  Delete Review Data
+ * ************************** */
+async function deleteReview(review_id) {
+    try {
+      const sql =
+        "DELETE FROM public.review WHERE review_id = $1;"
+      const data = await pool.query(sql, [review_id])
+      return data
+    } catch (error) {
+      console.error("Delete review Error: " + error)
+    }
+  }
+
+  module.exports = {getReviewsByVehicleId, addReview, getReviewsByAccountId, getReviewById, updateReview, deleteReview};

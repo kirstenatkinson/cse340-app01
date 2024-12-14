@@ -18,6 +18,7 @@
     <% } %>
 
     <form id="delete-review-form" action="/review/delete" method="POST">
+      <p>Confirm Deletion - The delete is permanent.</p>
         <fieldset id="delete-review-information">
           <label for="review_date">Review Date</label>
             <input type="text" name="review_date" id="review_date" readonly value="<%= locals.review_date || '' %>">

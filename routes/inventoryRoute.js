@@ -33,13 +33,15 @@ router.get("/add-inventory",
     utilities.handleErrors(invController.buildAddInventory));
 
 // Route to submit classification form
-router.post('/add-classification', 
+router.post('/add-classification',
+    utilities.checkAdminPrivileges, 
     validate.addClassRules(), 
     validate.checkClassData, 
     utilities.handleErrors(invController.addClassification));
 
 // Route to submit inventory form
 router.post("/add-inventory", 
+    utilities.checkAdminPrivileges,
     validate.newInventoryRules(), 
     validate.checkInventoryData, 
     utilities.handleErrors(invController.addInventory));
@@ -55,6 +57,7 @@ router.get("/edit/:invId",
 
 // Route to edit inventory
 router.post("/update/", 
+    utilities.checkAdminPrivileges,
     validate.newInventoryRules(), 
     validate.checkUpdateData, 
     utilities.handleErrors(invController.updateInventory))
@@ -66,6 +69,7 @@ router.get("/delete/:inv_id",
 
 // Delete inventory
 router.post("/delete/", 
+    utilities.checkAdminPrivileges,
     utilities.handleErrors(invController.deleteInventory))
 
 module.exports = router;

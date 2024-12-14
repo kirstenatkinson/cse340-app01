@@ -55,7 +55,6 @@ reviewCont.buildUpdate = async function (req, res) {
  * ************************** */
 reviewCont.updateReview = async function (req, res) {
   let nav = await utilities.getNav()
-  console.log("Updating review:", req.body)
   const {
     review_text, 
     review_id
@@ -78,7 +77,7 @@ reviewCont.updateReview = async function (req, res) {
  *  Deliver Delete Review View by Review Id
  * ************************** */
 reviewCont.buildDelete = async function (req, res) {
-    const review_id = parseInt(req.params.invId)
+    const review_id = parseInt(req.params.review_id)
     let nav = await utilities.getNav()
     const reviewData = await reviewModel.getReviewById(review_id)
     const vehicleName = `${reviewData[0].inv_year} ${reviewData[0].inv_make} ${reviewData[0].inv_model}`
@@ -89,11 +88,34 @@ reviewCont.buildDelete = async function (req, res) {
       nav,
       errors: null,
       inv_id: reviewData[0].inv_id,
+      review_id: reviewData[0].review_id,
       account_id: reviewData[0].account_id,
       review_date: formattedDate,
       review_text: reviewData[0].review_text,
       mainClass: "management-view"
     })
+  }
+
+/* ***************************
+ * Delete Review Data
+ * ************************** */
+reviewCont.deleteReview = async function (req, res) {
+    let nav = await utilities.getNav()
+    console.log("Deleting review:", req.body)
+    const { 
+      review_id
+    } = req.body
+    const deleteResult = await reviewModel.deleteReview (
+      review_id
+    )
+  
+    if (deleteResult) {
+        req.flash("notice", `Your review was successfully deleted.`)
+        res.redirect("/account/")
+      } else {
+        req.flash("notice", "Sorry, the review deletion failed.")
+        res.status(501).redirect(`/review/delete/${review_id}`)
+      }
   }
 
 module.exports = reviewCont

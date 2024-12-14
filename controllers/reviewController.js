@@ -26,4 +26,74 @@ reviewCont.addReview = async function(req, res) {
   }
 }
 
+/* ***************************
+ *  Deliver Edit Review View by Review Id
+ * ************************** */
+reviewCont.buildUpdate = async function (req, res) {
+  const review_id = parseInt(req.params.review_id)
+  let nav = await utilities.getNav()
+  const reviewData = await reviewModel.getReviewById(review_id)
+  const vehicleName = `${reviewData[0].inv_year} ${reviewData[0].inv_make} ${reviewData[0].inv_model}`
+  const formatter = new Intl.DateTimeFormat('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
+  const formattedDate = formatter.format(new Date(reviewData[0].review_date))
+  console.log(reviewData[0].review_text)
+  res.render("./account/review-update", {
+    title: `Edit ${vehicleName} Review`,
+    nav,
+    errors: null,
+    inv_id: reviewData[0].inv_id,
+    account_id: reviewData[0].account_id,
+    review_id: reviewData[0].review_id,
+    review_date: formattedDate,
+    review_text: reviewData[0].review_text,
+    mainClass: "management-view"
+  })
+}
+
+/* ***************************
+ *  Update Review Data
+ * ************************** */
+reviewCont.updateReview = async function (req, res) {
+  let nav = await utilities.getNav()
+  console.log("Updating review:", req.body)
+  const {
+    review_text, 
+    review_id
+  } = req.body
+  const updateResult = await reviewModel.updateReview (
+    review_text, 
+    review_id
+  )
+
+  if (updateResult) {
+      req.flash("notice", `Your review was successfully updated.`)
+      res.redirect("/account/")
+    } else {
+      req.flash("notice", "Sorry, the review update failed.")
+      res.status(501).redirect(`/review/update/${review_id}`)
+    }
+}
+
+/* ***************************
+ *  Deliver Delete Review View by Review Id
+ * ************************** */
+reviewCont.buildDelete = async function (req, res) {
+    const review_id = parseInt(req.params.invId)
+    let nav = await utilities.getNav()
+    const reviewData = await reviewModel.getReviewById(review_id)
+    const vehicleName = `${reviewData[0].inv_year} ${reviewData[0].inv_make} ${reviewData[0].inv_model}`
+    const formatter = new Intl.DateTimeFormat('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
+    const formattedDate = formatter.format(new Date(reviewData[0].review_date))
+    res.render("./account/review-delete", {
+      title: `Edit ${vehicleName} Review`,
+      nav,
+      errors: null,
+      inv_id: reviewData[0].inv_id,
+      account_id: reviewData[0].account_id,
+      review_date: formattedDate,
+      review_text: reviewData[0].review_text,
+      mainClass: "management-view"
+    })
+  }
+
 module.exports = reviewCont

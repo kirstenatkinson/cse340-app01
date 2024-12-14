@@ -123,6 +123,29 @@ Util.buildReviewList = async function(data) {
   return list
 }
 
+/* **************************************
+* Build the account review list HTML
+* ************************************ */
+Util.accountReviewList = async function(data) {
+  let list = ""
+  if(data.length > 0){
+    list = '<ol id="account-review-list">'
+    data.forEach(review => { 
+      const formatter = new Intl.DateTimeFormat('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
+      const formattedDate = formatter.format(new Date(review.review_date))
+      list += '<li>'
+      console.log(review.inv_year)
+      list += `<p class="account-review">Reviewed the ${review.inv_year} ${review.inv_make} ${review.inv_model} on ${formattedDate}'</p>`
+      list += `<p class="review-description">${review.review_text}</p>`
+      list += `<p><a href="/review/update/${review.review_id}">Edit</a> | <a href="/review/delete/${review.review_id}">Delete</a></p>`
+    })
+    list += '</ol>'
+  } else { 
+    list += '<p class="no-reviews">You have no reviews!</p>'
+  }
+  return list
+}
+
 Util.errorGrid = async function(data) {
   let grid
   if(data.length > 0){

@@ -1,0 +1,35 @@
+<% if (title) { %>
+    <h1><%= title %></h1>
+    <% } else {
+      res.redirect('/')
+    } %>
+
+    <% if (notice && notice.length > 0) { %>
+      <div class="notice-message">
+        <%= notice %>
+      </div>
+    <% } %>
+    <% if (errors && errors.length > 0) { %>
+      <ul class="error">
+        <% errors.forEach(msg => { %>
+          <li><%= msg %></li>
+        <% }) %>
+      </ul>
+    <% } %>
+
+    <form id="edit-review-form" action="/review/update" method="POST">
+        <fieldset id="edit-review-information">
+          <label for="review_date">Review Date</label>
+            <input type="text" name="review_date" id="review_date" readonly value="<%= locals.review_date || '' %>">
+            <label for="review_text">Your Review</label>
+            <textarea 
+              id="review_text" 
+              name="review_text" 
+              required ><%= review_text %></textarea>
+        </fieldset>
+        <input type="submit" id="review-submit" value="Submit Review">
+        <!-- Hidden fields -->
+        <input type="hidden" name="inv_id" value="<%= inv_id %>" />
+        <input type="hidden" name="account_id" value="<%= account_id %>" />
+        <input type="hidden" name="review_id" value="<%= review_id %>" />
+      </form>

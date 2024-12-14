@@ -43,10 +43,6 @@ router.get("/update/:account_id",
 
 // Update Account Information
 router.post("/update", 
-  (req, res, next) => {
-    console.log("POST /account/update hit");
-    next(); // Proceed to the next middleware
-  },
   utilities.checkLogin,
   validate.updateAccountRules(),
   validate.checkUpdateData,

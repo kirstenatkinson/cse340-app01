@@ -106,14 +106,13 @@ Util.buildVehicleDisplayGrid = async function(data) {
 Util.buildReviewList = async function(data) {
   let list = ""
   if(data.length > 0){
-    list = '<ul id="review-list">'
+    list = '<ul id="vehicle-review-list">'
     data.forEach(review => { 
       const displayedName = `${review.account_firstname[0]}${review.account_lastname}`.replace(/\s/g, '')
       const formatter = new Intl.DateTimeFormat('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
       const formattedDate = formatter.format(new Date(review.review_date))
       list += '<li>'
-      list += '<span>'+ displayedName + '</span>'
-      list += '<p class="review-date">Written on ' + formattedDate + '</p>'
+      list += `<p class="review-info"><span>${displayedName}</span> | Written on ${formattedDate}</p>`
       list += '<p class="review-description">' + review.review_text + '</p>'
     })
     list += '</ul>'
@@ -129,17 +128,17 @@ Util.buildReviewList = async function(data) {
 Util.accountReviewList = async function(data) {
   let list = ""
   if(data.length > 0){
-    list = '<ol id="account-review-list">'
+    list = '<ul id="account-reviews-list">'
     data.forEach(review => { 
       const formatter = new Intl.DateTimeFormat('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
       const formattedDate = formatter.format(new Date(review.review_date))
       list += '<li>'
       console.log(review.inv_year)
-      list += `<p class="account-review">Reviewed the ${review.inv_year} ${review.inv_make} ${review.inv_model} on ${formattedDate}'</p>`
-      list += `<p class="review-description">${review.review_text}</p>`
+      list += `<p class="account-review">Reviewed the ${review.inv_year} ${review.inv_make} ${review.inv_model} on ${formattedDate}</p>`
+      list += `<p class="review-description">"${review.review_text}"</p>`
       list += `<p><a href="/review/update/${review.review_id}">Edit</a> | <a href="/review/delete/${review.review_id}">Delete</a></p>`
     })
-    list += '</ol>'
+    list += '</ul>'
   } else { 
     list += '<p class="no-reviews">You have no reviews!</p>'
   }

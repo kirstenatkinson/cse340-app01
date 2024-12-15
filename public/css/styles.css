@@ -239,6 +239,7 @@ main.classification-view {
 .management-view h1{
   text-align: center;
 }
+
 #login-form {
   background-color: var(--primary-color);
   width: 75%;
@@ -248,6 +249,48 @@ main.classification-view {
   font-size: large;
   border-radius: 1em;
   color: white;
+}
+
+#account-reviews-list {
+  padding: 0;
+}
+
+#account-reviews-list li{
+  padding: 1em;
+  list-style-type: none;
+  margin: 0;
+  border: .25em solid var(--primary-color);
+  border-radius: 1em;
+  margin-bottom: 1em;
+}
+
+#vehicle-review-list {
+  border: none;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+#vehicle-review-list li {
+  padding: .5em;
+}
+
+#vehicle-review-list li:nth-child(2n + 1) {
+  background-color: #ccc;
+}
+
+#vehicle-review-list li:nth-child(2n) {
+  background-color: #e8e8e8;
+}
+
+#vehicle-review-list li p {
+  padding: .5em 0 0 0;
+}
+
+#account-reviews-list li p:nth-child(2) {
+  background-color: #ccc;
+  padding: 1em;
+  font-size: small;
 }
 
 #registration-form,
@@ -261,8 +304,13 @@ main.classification-view {
   margin: auto;
 }
 
+#add-review-form {
+  width: 100%;
+}
+
 #delete-review-form,
-#edit-review-form {
+#edit-review-form,
+#add-review-form {
   border: .5em solid var(--secondary-color);
   border-radius: 1em;
   padding: 1em;
@@ -279,7 +327,8 @@ main.classification-view {
 #updated-inventory-information,
 #classification-information,
 #delete-review-information,
-#edit-review-information {
+#edit-review-information,
+#add-review-information {
   margin: auto;
   width: 80%;
   border: none;
@@ -291,7 +340,8 @@ main.classification-view {
 #updateForm label,
 #add-classification-form label,
 #delete-review-form label,
-#edit-review-form label {
+#edit-review-form label,
+#add-review-form label {
   display: block;
   text-transform: uppercase;
   font-weight: bold;
@@ -311,7 +361,8 @@ main.classification-view {
 }
 
 #delete-review-information input,
-#edit-review-information input {
+#edit-review-information input,
+#add-review-information input {
   background-color: #cccccc;
   padding: .5em;
   margin-bottom: 2.5em;
@@ -322,7 +373,8 @@ main.classification-view {
 #new-inventory-information textarea,
 #updated-inventory-information textarea,
 #delete-review-information textarea,
-#edit-review-information textarea {
+#edit-review-information textarea,
+#add-review-information textarea {
   padding: .5em;
   width: 100%;
   border: 0.2em solid var(--primary-color);
@@ -350,7 +402,8 @@ main.classification-view {
 #updateFormSubmit,
 #new-classification-submit,
 #review-delete-submit,
-#review-update-submit {
+#review-update-submit,
+#review-submit {
   padding: 1em 3em;
   display: block;
   margin: auto;
@@ -368,7 +421,8 @@ main.classification-view {
 #updateFormSubmit:hover,
 #new-classification-submit:hover,
 #review-delete-submit:hover,
-#review-update-submit:hover {
+#review-update-submit:hover, 
+#review-submit:hover{
   background-color: var(--primary-color);
   color: white;
   transition: .5s;
@@ -399,7 +453,7 @@ form input:required:invalid,
 form input:focus:invalid,
 form textarea:required:invalid,
 form textarea:focus:invalid {
-  background: rgb(236, 125, 125);
+  background: rgb(236, 170, 170);
 }
 
 .error {
